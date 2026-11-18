@@ -1,8 +1,8 @@
-# SoftBank Air 6 (软银 Air6 / A775) — OpenWrt MT6990
+# SoftBank Air 6 (A775) — OpenWrt MT6990
 
 **English** | [简体中文](README.zh-CN.md)
 
-OpenWrt platform adaptation and a CPE management interface specifically for the **SoftBank Air 6 (软银 Air6 / A775)** home router: MediaTek MT6990 / T830, MT7990 tri-band Wi-Fi, Quectel RG620T-SBK cellular modem, and eMMC A/B slots.
+OpenWrt platform adaptation and a CPE management interface specifically for the **SoftBank Air 6 (A775)** home router: MediaTek MT6990 / T830, MT7990 tri-band Wi-Fi, Quectel RG620T-SBK cellular modem, and eMMC A/B slots.
 
 ## Source baseline, references and acknowledgements
 
@@ -25,9 +25,9 @@ Thanks to the following projects and contributors. The roles below reflect sourc
 
 The excluded `mtwifi-cfg-tool` files identify oraybox, StarField Xu and other contributors, with GPL notices. Thanks for their wireless management work. Excluding that package does not change its original license.
 
-### Pinned feeds
+### Reference feed revisions
 
-The build uses the root [feeds.conf](feeds.conf):
+The public tree ships [feeds.conf.default](feeds.conf.default). To use the reference revisions below, set up a local `feeds.conf` before running `./scripts/feeds update -a`. Use `src-git NAME URL^REVISION` for each pinned feed.
 
 | Feed | Repository | Revision |
 | --- | --- | --- |
@@ -71,7 +71,7 @@ sudo apt install -y build-essential clang flex bison g++ gawk gcc-multilib \
   rsync unzip zlib1g-dev file wget curl libelf-dev zstd squashfs-tools
 ```
 
-### 2. Clone and install pinned feeds
+### 2. Clone and install feeds
 
 ```bash
 mkdir -p ~/src
@@ -83,7 +83,7 @@ cd openwrt-air6
 make defconfig
 ```
 
-While this preparation repository is private, cloning requires your own GitHub access. The configured target is `mediatek/mt6990/softbank_air6`. Use `make menuconfig` to change features. Do not select `mtwifi-cfg-tool` unless you independently supply that component.
+The configured target is `mediatek/mt6990/softbank_air6`. Use `make menuconfig` to change features. Do not select `mtwifi-cfg-tool` unless you independently supply that component.
 
 ### 3. Compile
 
@@ -115,11 +115,13 @@ APK signing uses your own build identity. For the web updater, supply your own t
 
 The export was checked for source contents, sensitive material, selected script syntax and the running reference UI. A complete clean build of this reduced tree has not been performed, and it has not been flashed. Private-system tests are not acceptance tests for this export without its excluded signing and wireless-management components.
 
-## Usage and contribution
+## Usage
 
 Open the gateway address obtained through DHCP and configure your own login password. In the cellular page, configure SIM/mode/APN and verify registration, an assigned data address and external connectivity. Saving a custom homepage with zero modules disables it; other layouts can be adjusted from the homepage.
 
 Related project: [AIR6 modem metadata research](https://github.com/hchyhchyxh/air6-modem).
+
+## License and contributions
 
 Retain [COPYING](COPYING), [LICENSES](LICENSES) and file-level notices. OpenWrt, Linux, drivers, SDK interfaces, third-party JavaScript and firmware retain their respective licenses. This export does not relicense everything under one license. Contributions to board support, wireless compatibility, cellular stability and documentation are welcome; include a revision and redacted reproduction logs.
 
@@ -145,6 +147,12 @@ Captured after real China Telecom **5G n78** registration and data connectivity.
 
 - [Cellular API telemetry: CA, EN-DC and cell measurements](docs/cellular-telemetry-api.md)
 
-## License and project notice / 许可与项目声明
+## License and project notice
 
-See [licensing scope / 许可范围](LICENSING.md) and [disclaimer, trademarks and rights requests / 免责声明、商标及权利反馈](DISCLAIMER.md).
+See the [licensing scope](LICENSING.md) and the [disclaimer, trademark and rights-request policies](DISCLAIMER.md).
+
+## Support development
+
+If you would like to support continued development, please donate only what you can comfortably afford. Donations are entirely voluntary, and all proceeds go toward purchasing AI tokens for development. Please keep discussions respectful.
+
+![Donation QR codes](docs/images/donation-qr.jpg)

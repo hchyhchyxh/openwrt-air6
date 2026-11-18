@@ -1,6 +1,6 @@
-[English](README.md) | **简体中文**
+# SoftBank Air 6（软银 Air6 / A775）OpenWrt MT6990
 
-# SoftBank Air 6 (软银 Air6 / A775) — OpenWrt MT6990
+[English](README.md) | **简体中文**
 
 面向日本软银家用路由器 **SoftBank Air 6（软银 Air6，型号 A775）** 的 OpenWrt 适配与 CPE 管理界面。SoC 为 MediaTek MT6990 / T830，无线为 MT7990 三频，蜂窝模组为移远 RG620T-SBK，使用 eMMC A/B 槽。
 
@@ -25,9 +25,9 @@
 
 `mtwifi-cfg-tool` 的原文件注明 oraybox、StarField Xu 等作者及 GPL 许可。本开源副本按维护者要求不包含这个包；感谢原作者的无线管理工作，移除包不改变其原许可。
 
-### 固定 feeds
+### 参考 Feed 版本
 
-实际构建优先使用根目录 [feeds.conf](feeds.conf)，目前固定如下提交：
+公开仓库提供 [feeds.conf.default](feeds.conf.default)。如需使用下表的参考版本，请在运行 `./scripts/feeds update -a` 前创建本地 `feeds.conf`，按 `src-git NAME URL^REVISION` 格式固定各 Feed。
 
 | Feed | 仓库 | 提交 |
 | --- | --- | --- |
@@ -62,7 +62,7 @@
 
 在替代层完善前，不能把单独编译出 MT7990 驱动等同于已经具备完整的无线配置和启停管理能力。
 
-## Build：从源码构建
+## 从源码构建
 
 建议在 Linux 文件系统目录下构建，例如 WSL2 的 `~/src`，不要在 `/mnt/c`、`/mnt/x` 中编译。依赖说明以 [OpenWrt 官方构建文档](https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem) 为准。
 
@@ -75,7 +75,7 @@ sudo apt install -y build-essential clang flex bison g++ gawk gcc-multilib \
   rsync unzip zlib1g-dev file wget curl libelf-dev zstd squashfs-tools
 ```
 
-### 2. 获取工程与固定 feeds
+### 2. 克隆仓库并安装 Feed
 
 ```bash
 mkdir -p ~/src
@@ -87,7 +87,7 @@ cd openwrt-air6
 make defconfig
 ```
 
-当前仓库暂为私有时，克隆需要你自己的 GitHub 权限；公开后可匿名读取。根目录 `.config` 的目标为 `mediatek/mt6990/softbank_air6`。需要修改功能时运行 `make menuconfig`。不要在未单独提供源码的情况下重新选中 `mtwifi-cfg-tool`。
+根目录 `.config` 的目标为 `mediatek/mt6990/softbank_air6`。需要修改功能时运行 `make menuconfig`。不要在未单独提供源码的情况下重新选中 `mtwifi-cfg-tool`。
 
 ### 3. 编译
 
@@ -149,9 +149,14 @@ APK 构建签名使用构建者自己的密钥，原私钥没有公开。Web 更
 
 ![系统与自定义首页](docs/images/system.png)
 
-
 - [蜂窝 API：CA、EN-DC 与小区测量说明](docs/cellular-telemetry-api.md)
 
-## License and project notice / 许可与项目声明
+## 许可与项目声明
 
-See [licensing scope / 许可范围](LICENSING.md) and [disclaimer, trademarks and rights requests / 免责声明、商标及权利反馈](DISCLAIMER.md).
+参阅[许可范围](LICENSING.md)与[免责声明、商标及权利反馈](DISCLAIMER.md)。
+
+## 捐赠支持
+
+如果你愿意支持项目继续开发，欢迎理性捐赠、量力而行。捐赠完全自愿，所得款项仅用于购买开发所需的 AI Token。请友善交流，感谢理解。
+
+![捐赠二维码](docs/images/donation-qr.jpg)
